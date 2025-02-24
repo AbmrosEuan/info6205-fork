@@ -112,6 +112,19 @@ public class PriorityQueue4ary<K> implements Iterable<K> {
         swimUp(last + first - 1); // Reorder the 4-ary heap
     }
 
+    public K giveAndReturnSpilled(K key) {
+        K spilled = null;
+        if (last == binHeap.length - first) {
+            // if we are already at capacity, then we arbitrarily trash the least eligible element
+            // (even if it's more eligible than key).
+            // we do that by decrementing last, but first we get the element that is about to be overwritten
+            spilled = binHeap[last + first - 1]; // 这里拿到队尾元素
+            last--;
+        }
+        binHeap[++last + first - 1] = key; // insert the key into the binary heap
+        swimUp(last + first - 1);
+        return spilled;
+    }
     /**
      * Removes and returns the root element from this priority queue,
      * while adjusting the 4-ary heap to maintain heap order.

@@ -1,24 +1,18 @@
 package com.phasmidsoftware.dsaipg.adt.pq;
 
 import com.phasmidsoftware.dsaipg.util.Benchmark_Timer;
-import com.phasmidsoftware.dsaipg.util.Stopwatch;
-import com.phasmidsoftware.dsaipg.util.TimeLogger;
-import com.phasmidsoftware.dsaipg.util.Utilities;
-
 import java.util.Comparator;
 import java.util.Random;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
+
 
 public class PriorityQueueBenchmark {
 
-    // Heap capacity (maximum number of elements held simultaneously)
+    // Heap capacity
     private final int M;
-    // Number of insert operations (e.g., 16,000 times)
+    // Number of insert operations
     private final int numInsert;
-    // Number of delete operations (e.g., 4,000 times)
+    // Number of delete operations
     private final int numRemove;
     // Number of test runs
     private final int runs;
@@ -98,24 +92,28 @@ public class PriorityQueueBenchmark {
 
     public static void main(String[] args) {
         // Example: Use capacity 4095, insert 16,000 elements, delete 4,000 elements, and run the test 200 times
-        PriorityQueueBenchmark benchmark = new PriorityQueueBenchmark(4095, 16000, 4000, 200);
+        PriorityQueueBenchmark benchmark = new PriorityQueueBenchmark(4095, 16000, 4000, 400);
         benchmark.benchmarkBasic();
         benchmark.benchmarkFloyd();
 
-        PriorityQueueBenchmark benchmark2 = new PriorityQueueBenchmark(4095, 16000, 4000, 400);
+        PriorityQueueBenchmark benchmark2 = new PriorityQueueBenchmark(4095, 16000, 4000, 800);
         benchmark2.benchmarkBasic();
         benchmark2.benchmarkFloyd();
 
-        PriorityQueueBenchmark benchmark3 = new PriorityQueueBenchmark(4095, 16000, 4000, 800);
+        PriorityQueueBenchmark benchmark3 = new PriorityQueueBenchmark(4095, 16000, 4000, 1600);
         benchmark3.benchmarkBasic();
         benchmark3.benchmarkFloyd();
 
-        PriorityQueueBenchmark benchmark4 = new PriorityQueueBenchmark(4095, 16000, 4000, 1600);
+        PriorityQueueBenchmark benchmark4 = new PriorityQueueBenchmark(4095, 16000, 4000, 3200);
         benchmark4.benchmarkBasic();
         benchmark4.benchmarkFloyd();
 
-        PriorityQueueBenchmark benchmark5 = new PriorityQueueBenchmark(4095, 16000, 4000, 3200);
+        PriorityQueueBenchmark benchmark5 = new PriorityQueueBenchmark(4095, 16000, 4000, 6400);
         benchmark5.benchmarkBasic();
         benchmark5.benchmarkFloyd();
+
+        PriorityQueueBenchmark benchmark6 = new PriorityQueueBenchmark(4095, 16000, 4000, 12800);
+        benchmark6.benchmarkBasic();
+        benchmark6.benchmarkFloyd();
     }
 }
