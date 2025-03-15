@@ -1,5 +1,5 @@
 package com.phasmidsoftware.dsaipg.sort.elementary;
-import com.phasmidsoftware.dsaipg.util.Benchmark_Timer;
+import com.phasmidsoftware.dsaipg.util.benchmark.Benchmark_Timer;
 import java.util.Random;
 import java.util.function.Supplier;
 
