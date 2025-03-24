@@ -1,6 +1,6 @@
 package com.phasmidsoftware.dsaipg.adt.pq;
 
-import com.phasmidsoftware.dsaipg.util.Benchmark_Timer;
+import com.phasmidsoftware.dsaipg.util.benchmark.Benchmark_Timer;
 
 import java.util.Comparator;
 import java.util.Random;
