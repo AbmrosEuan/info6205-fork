@@ -64,6 +64,7 @@ public class MergeSort<X extends Comparable<X>> extends SortWithComparableHelper
         return result;
     }
 
+
     /**
      * Sorts the specified portion of the array using the MergeSort algorithm.
      *
@@ -71,13 +72,34 @@ public class MergeSort<X extends Comparable<X>> extends SortWithComparableHelper
      * @param from the starting index of the range to sort, inclusive
      * @param to   the ending index of the range to sort, exclusive
      */
+
     public void sort(X[] a, int from, int to) {
         Config config = helper.getConfig();
         boolean noCopy = config.getBoolean(MERGESORT, NOCOPY);
         // CONSIDER don't copy but just allocate according to the xs/aux interchange optimization
-        @SuppressWarnings("unchecked") X[] aux = noCopy ? helper.copyArray(a) : (X[]) new Comparable[a.length];
-        sort(a, aux, from, to);
+//        @SuppressWarnings("unchecked") X[] aux = noCopy ? helper.copyArray(a) : (X[]) new Comparable[a.length];
+//        sort(a, aux, from, to);
+
+        X[] aux = (X[]) new Comparable[a.length];
+        System.arraycopy(a, 0, aux, 0, a.length);
+
+
+        sort(aux, a, from, to);
+
+        if (!isSorted(a, from, to)) {
+            System.arraycopy(aux, from, a, from, to - from);
+        }
+
     }
+
+    public boolean isSorted(X[] array, int from, int to) {
+        for (int i = from + 1; i < to; i++) {
+            if (array[i] == null || array[i - 1] == null) return false;
+            if (array[i].compareTo(array[i - 1]) < 0) return false;
+        }
+        return true;
+    }
+
 
     /**
      * Sets the memory for the array if it hasn't been set previously.
@@ -143,9 +165,18 @@ public class MergeSort<X extends Comparable<X>> extends SortWithComparableHelper
             insertionSort.sort(a, from, to);
             return;
         }
+        int mid = from + (to - from) / 2;
 
-        // TO BE IMPLEMENTED  : implement merge sort with insurance and no-copy optimizations
-throw new RuntimeException("implementation missing");
+        sort(aux, a, from, mid);
+        sort(aux, a, mid, to);
+        if (insurance && !helper.less(aux[mid], aux[mid - 1])) {
+            System.arraycopy(aux, from, a, from, to - from);
+            return;
+        }
+
+        merge(aux, a, from, mid, to);
+
+
     }
 
     /**
